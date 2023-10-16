@@ -97,7 +97,7 @@
 													<?php } ?>
 												</td>
 												<td class="align-middle text-center">
-													<?php if ($value->keterangan_absen == 'Telat') { ?>
+													<?php if ($value->keterangan == 'Telat') { ?>
 														<span class="badge badge-sm bg-gradient-danger">Telat</span>
 													<?php } else { ?>
 														<span class="badge badge-sm bg-gradient-success">Tepat Waktu</span>
@@ -133,18 +133,18 @@
 													</div>
 												</td>
 												<td>
-													<p class="text-xs font-weight-bold mb-0"><?= $ijinz->tanggal_ijin ?></p>
+													<p class="text-xs font-weight-bold mb-0"><?= $ijinz->tanggal_absen ?></p>
 												</td>
 												<td class="align-middle text-center text-sm">
 													<span class="badge badge-sm bg-gradient-success">
-														<?= $ijinz->awal_ijin ?>
+														<?= $ijinz->tgl_awal ?>
 													</span> -
 													<span class="badge badge-sm bg-gradient-warning">
-														<?= $ijinz->akhir_ijin ?>
+														<?= $ijinz->tgl_akhir ?>
 													</span>
 												</td>
 												<td class="align-middle text-center">
-													<span class="badge badge-sm bg-gradient-warning"><?= $ijinz->keterangan_ijin ?></span>
+													<span class="badge badge-sm bg-gradient-warning"><?= $ijinz->keterangan ?></span>
 												</td>
 											</tr>
 										<?php } ?>
@@ -176,18 +176,18 @@
 													</div>
 												</td>
 												<td>
-													<p class="text-xs font-weight-bold mb-0"><?= $cutis->tanggal_cuti ?></p>
+													<p class="text-xs font-weight-bold mb-0"><?= $cutis->tanggal_absen ?></p>
 												</td>
 												<td class="align-middle text-center text-sm">
 													<span class="badge badge-sm bg-gradient-success">
-														<?= $cutis->awal_cuti ?>
+														<?= $cutis->tgl_awal ?>
 													</span> -
 													<span class="badge badge-sm bg-gradient-warning">
-														<?= $cutis->akhir_cuti ?>
+														<?= $cutis->tgl_akhir ?>
 													</span>
 												</td>
 												<td class="align-middle text-center">
-													<span class="badge badge-sm bg-gradient-info"><?= $cutis->keterangan_cuti ?></span>
+													<span class="badge badge-sm bg-gradient-info"><?= $cutis->keterangan ?></span>
 												</td>
 											</tr>
 										<?php } ?>
@@ -219,17 +219,17 @@
 													</div>
 												</td>
 												<td>
-													<p class="text-xs font-weight-bold mb-0"><?= $sakits->tanggal_sakit ?></p>
+													<p class="text-xs font-weight-bold mb-0"><?= $sakits->tanggal_absen ?></p>
 												</td>
 												<td class="align-middle text-center text-sm">
 													<span class="badge badge-sm bg-gradient-success">
-														<?= $sakits->awal_sakit ?>
+														<?= $sakits->tgl_awal ?>
 													</span> -
 													<span class="badge badge-sm bg-gradient-warning">
-														<?= $sakits->akhir_sakit ?>
+														<?= $sakits->tgl_akhir ?>
 												</td>
 												<td class="align-middle text-center">
-													<span class="badge badge-sm bg-gradient-warning"><?= $sakits->keterangan_sakit ?></span>
+													<span class="badge badge-sm bg-gradient-warning"><?= $sakits->keterangan ?></span>
 												</td>
 												<td class="align-middle text-center">
 													<img src="<?= base_url('assets/sakit/' . $sakits->surat_sakit) ?>" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
@@ -257,20 +257,23 @@
 				date_default_timezone_set('Asia/Jakarta');
 				echo form_open('sales/add_absen')
 				?>
-				<input type="hidden" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control">
+				<input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control">
 				<input type="hidden" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control">
 				<input type="hidden" name="jam_absen" value="<?= date('H:i:s') ?>" class="form-control">
 				<?php if (date('H:i:s') >= '09:00:00') { ?>
-					<input type="hidden" name="keterangan_absen" value="Telat" class="form-control">
+					<input type="hidden" name="keterangan" value="Telat" class="form-control">
 				<?php } else { ?>
-					<input type="hidden" name="keterangan_absen" value="Tepat waktu" class="form-control">
+					<input type="hidden" name="keterangan" value="Tepat waktu" class="form-control">
 				<?php } ?>
 				<div class="modal-body">
 					<?php date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia 
 					?>
 					<label class="form-label">Nama Lengkap</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly>
+						&nbsp;<h6>
+							<?= $this->session->userdata('nama_lengkap') ?>
+						</h6>
+						<input type="text" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control" hidden>
 					</div>
 					<label class="form-label">Tanggal Absen</label>
 					<div class="input-group input-group-outline mb-3">
@@ -284,9 +287,9 @@
 					<div class="input-group input-group-outline mb-3">
 						<?php if (date('H:i:s') > '09:00:00') { ?>
 							<span class="badge badge-sm bg-gradient-danger">Telat</span>
-							<!-- <input type="text" name="keterangan_absen" value="Telat" class="form-control" readonly> -->
+							<!-- <input type="text" name="keterangan" value="Telat" class="form-control" readonly> -->
 						<?php } else { ?>
-							<!-- <input type="text" name="keterangan_absen" value="Tepat waktu" class="form-control" readonly> -->
+							<!-- <input type="text" name="keterangan" value="Tepat waktu" class="form-control" readonly> -->
 							<span class="badge badge-sm bg-gradient-success">Tepat Waktu</span>
 						<?php } ?>
 					</div>
@@ -311,30 +314,38 @@
 				<?php
 				echo form_open('sales/add_izin')
 				?>
-				<input type="hidden" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control">
-				<input type="hidden" name="tanggal_ijin" value="<?= date('Y-m-d') ?>" class="form-control">
+				<input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control">
+				<input type="hidden" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control">
 				<div class="modal-body">
 					<?php date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia 
 					?>
 					<label class="form-label">Nama Lengkap</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly>
+						&nbsp;
+						<h6>
+							<?= $this->session->userdata('nama_lengkap') ?>
+						</h6>
+						<!-- <input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly> -->
 					</div>
 					<label class="form-label">Tanggal Izin</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="tanggal_ijin" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+						<input type="text" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+					</div>
+					<label class="form-label">Jam Izin</label>
+					<div class="input-group input-group-outline mb-3">
+						<input type="text" name="jam_absen" value="<?= date('H:i:s') ?>" class="form-control" readonly>
 					</div>
 					<label class="form-label">Tanggal Awal Izin</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="awal_ijin" id="searchDateFrom">
+						<input type="date" class="form-control" name="tgl_awal" id="searchDateFrom">
 					</div>
 					<label class="form-label">Tanggal Akhir Izin</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="akhir_ijin" id="searchDateTo">
+						<input type="date" class="form-control" name="tgl_akhir" id="searchDateTo">
 					</div>
 					<label class="form-label">Keterangan Izin</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="keterangan_ijin" class="form-control">
+						<input type="text" name="keterangan" class="form-control">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -357,30 +368,38 @@
 				<?php
 				echo form_open('sales/add_cuti')
 				?>
-				<input type="hidden" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control">
-				<input type="hidden" name="tanggal_cuti" value="<?= date('Y-m-d') ?>" class="form-control">
+				<input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control">
+				<input type="hidden" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control">
 				<div class="modal-body">
 					<?php
 					?>
 					<label class="form-label">Nama Lengkap</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly>
+						&nbsp;
+						<h6>
+							<?= $this->session->userdata('nama_lengkap') ?>
+						</h6>
+						<!-- <input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly> -->
 					</div>
 					<label class="form-label">Tanggal Cuti</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="tanggal_cuti" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+						<input type="text" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+					</div>
+					<label class="form-label">Jam Cuti</label>
+					<div class="input-group input-group-outline mb-3">
+						<input type="text" name="jam_absen" value="<?= date('H:i:s') ?>" class="form-control" readonly>
 					</div>
 					<label class="form-label">Tanggal Awal Cuti</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="awal_cuti" id="searchDateFromCuti">
+						<input type="date" class="form-control" name="tgl_awal" id="searchDateFromCuti">
 					</div>
 					<label class="form-label">Tanggal Akhir Cuti</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="akhir_cuti" id="searchDateToCuti">
+						<input type="date" class="form-control" name="tgl_akhir" id="searchDateToCuti">
 					</div>
 					<label class="form-label">Keterangan Cuti</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="keterangan_cuti" class="form-control">
+						<input type="text" name="keterangan" class="form-control">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -403,30 +422,38 @@
 				<?php
 				echo form_open_multipart('sales/add_sakit')
 				?>
-				<input type="hidden" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control">
-				<input type="hidden" name="tanggal_cuti" value="<?= date('Y-m-d') ?>" class="form-control">
+				<input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control">
+				<input type="hidden" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control">
 				<div class="modal-body">
 					<?php
 					?>
 					<label class="form-label">Nama Lengkap</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly>
+						&nbsp;
+						<h6>
+							<?= $this->session->userdata('nama_lengkap') ?>
+						</h6>
+						<!-- <input type="text" name="nama_lengkap" value="<?= $this->session->userdata('nama_lengkap') ?>" class="form-control" readonly> -->
 					</div>
 					<label class="form-label">Tanggal Sakit</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="tanggal_sakit" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+						<input type="text" name="tanggal_absen" value="<?= date('Y-m-d') ?>" class="form-control" readonly>
+					</div>
+					<label class="form-label">Jam Sakit</label>
+					<div class="input-group input-group-outline mb-3">
+						<input type="text" name="jam_absen" value="<?= date('H:i:s') ?>" class="form-control" readonly>
 					</div>
 					<label class="form-label">Tanggal Awal Sakit</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="awal_sakit" id="searchDateFromsakit">
+						<input type="date" class="form-control" name="tgl_awal" id="searchDateFromsakit">
 					</div>
 					<label class="form-label">Tanggal Akhir Sakit</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="date" class="form-control" name="akhir_sakit" id="searchDateTosakit">
+						<input type="date" class="form-control" name="tgl_akhir" id="searchDateTosakit">
 					</div>
 					<label class="form-label">Keterangan Sakit</label>
 					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="keterangan_sakit" class="form-control">
+						<input type="text" name="keterangan" class="form-control">
 					</div>
 					<label class="form-label">Keterangan Sakit</label>
 					<div class="input-group input-group-outline mb-3">

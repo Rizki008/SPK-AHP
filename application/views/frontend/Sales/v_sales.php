@@ -94,7 +94,7 @@
 											</div>
 										</td>
 										<td class="align-middle text-center text-sm">
-											<span class="text-xs font-weight-bold"> <?= $value->nama_paket ?> </span>
+											<span class="text-xs font-weight-bold"> <?= $value->produk_layanan ?>,<?= $value->paket ?> </span>
 										</td>
 										<td class="align-middle text-center text-sm">
 											<span class="text-xs font-weight-bold"> <?= $value->durasi_langganan ?> </span>

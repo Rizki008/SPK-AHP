@@ -29,7 +29,7 @@ class Pelanggan extends CI_Controller
 		$data = array(
 			'id_user' => $this->session->userdata('id_user'),
 			'id_penjualan' => $this->input->post('id_penjualan'),
-			'nama_paket' => $this->input->post('nama_paket'),
+			// 'nama_paket' => $this->input->post('nama_paket'),
 			'durasi_langganan' => $this->input->post('durasi_langganan'),
 		);
 		$this->m_sales->add_pel($data);
@@ -44,7 +44,7 @@ class Pelanggan extends CI_Controller
 			'id_pelanggan' => $id_pelanggan,
 			'id_user' => $this->session->userdata('id_user'),
 			'id_penjualan' => $this->input->post('id_penjualan'),
-			'nama_paket' => $this->input->post('nama_paket'),
+			// 'nama_paket' => $this->input->post('nama_paket'),
 			'durasi_langganan' => $this->input->post('durasi_langganan'),
 		);
 		$this->m_sales->update_pel($data);

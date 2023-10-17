@@ -41,10 +41,10 @@
 											<p class="text-xs font-weight-bold mb-0"><?= $value->no_hp ?></p>
 										</td>
 										<td class="align-middle text-center text-sm">
-											<span class="badge badge-sm bg-gradient-success"><?= $value->tgl_penjualan ?></span>
+											<span class="badge badge-sm bg-gradient-success"><?= $value->tgl_kontrak_langganan ?></span>
 										</td>
 										<td class="align-middle text-center">
-											<span class="text-secondary text-xs font-weight-bold"><?= $value->nama_paket ?></span>
+											<span class="text-secondary text-xs font-weight-bold"><?= $value->produk_layanan ?>,<?= $value->paket ?></span>
 										</td>
 										<td class="align-middle text-center">
 											<span class="text-secondary text-xs font-weight-bold"><?= $value->durasi_langganan ?> Bulan</span>
@@ -93,10 +93,6 @@
 							<?php } ?>
 						</select>
 					</div>
-					<label class="form-label">Nama Paket</label>
-					<div class="input-group input-group-outline mb-3">
-						<input type="text" name="nama_paket" class="form-control">
-					</div>
 					<label class="form-label">Durasi Langganan</label>
 					<div class="input-group input-group-outline mb-3">
 						<select name="durasi_langganan" class="form-control" id="">
@@ -137,10 +133,6 @@
 									<option value="<?= $jual->id_penjualan ?>"><?= $jual->nama_pelanggan ?></option>
 								<?php } ?>
 							</select>
-						</div>
-						<label class="form-label">Nama Paket</label>
-						<div class="input-group input-group-outline mb-3">
-							<input type="text" name="nama_paket" value="<?= $rows->nama_paket ?>" class="form-control">
 						</div>
 						<label class="form-label">Durasi Langganan</label>
 						<div class="input-group input-group-outline mb-3">

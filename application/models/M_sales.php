@@ -71,9 +71,22 @@ class M_sales extends CI_Model
 		$this->db->order_by('id_penjualan', 'desc');
 		return $this->db->get()->result();
 	}
+	public function detail_penjualan($id_penjualan)
+	{
+		$this->db->select('*');
+		$this->db->from('penjualan');
+		$this->db->join('biaya', 'penjualan.no_permintaan = biaya.no_permintaan', 'left');
+		$this->db->where('id_penjualan', $id_penjualan);
+		return $this->db->get()->result();
+	}
+
 	public function add_jual($data)
 	{
 		$this->db->insert('penjualan', $data);
+	}
+	public function add_bayar($data)
+	{
+		$this->db->insert('biaya', $data);
 	}
 	public function update_jual($data)
 	{
@@ -113,7 +126,7 @@ class M_sales extends CI_Model
 	//DASHBOARD
 	public function jml_penjualan()
 	{
-		return $this->db->query("SELECT COUNT(id_penjualan) as jml_jual,DAY(tgl_penjualan) AS hari FROM penjualan WHERE (tgl_penjualan > CURDATE());")->result();
+		return $this->db->query("SELECT COUNT(id_penjualan) as jml_jual,DAY(tgl_kontrak_langganan) AS hari FROM penjualan WHERE (tgl_kontrak_langganan > CURDATE());")->result();
 	}
 	public function jml_pelanggan()
 	{

@@ -26,42 +26,74 @@ class Penjualan extends CI_Controller
 	// Add a new item
 	public function add()
 	{
+		$this->form_validation->set_rules('jenis_permohonan', 'Jenis Permohonan', 'required', array('required' => '%s Wajib Untuk Diisi!!!'));
+		$this->form_validation->set_rules('no_permintaan', 'No Permintaan', 'required', array('required' => '%s Wajib Untuk Diisi!!!'));
+		$this->form_validation->set_rules('no_tlp_internet', 'No Telepon / Internet', 'required', array('required' => '%s Wajib Untuk Diisi!!!'));
+		$this->form_validation->set_rules('produk_layanan', 'Produk Layanan', 'required', array('required' => '%s Wajib Untuk Diisi!!!'));
+		$this->form_validation->set_rules('paket', 'Paket', 'required', array('required' => '%s Wajib Untuk Diisi!!!'));
+
+		if ($this->form_validation->run() == FALSE) {
+			$data = array(
+				'title' => 'Input Penjualan Baru',
+				'isi' => 'frontend/penjualan/v_add'
+			);
+			$this->load->view('frontend/v_wrapper', $data, FALSE);
+		} else {
+			$data = array(
+				'id_user' => $this->session->userdata('id_user'),
+				'tgl_kontrak_langganan' => date('Y-m-d H:i:s'),
+				'no_permintaan' => $this->input->post('no_permintaan'),
+				'jenis_permohonan' => $this->input->post('jenis_permohonan'),
+				'produk_layanan' => $this->input->post('produk_layanan'),
+				'no_tlp_internet' => $this->input->post('no_tlp_internet'),
+				'paket' => $this->input->post('paket'),
+				'kecepatan' => $this->input->post('kecepatan'),
+				'perangkat' => $this->input->post('perangkat'),
+				'fitur_tambahan' => $this->input->post('fitur_tambahan'),
+				'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+				'tipe_pelanggan' => $this->input->post('tipe_pelanggan'),
+				'no_ktp' => $this->input->post('no_ktp'),
+				'alamat_instalasi' => $this->input->post('alamat_instalasi'),
+				'alamat_pelanggan' => $this->input->post('alamat_pelanggan'),
+				'kode_pos' => $this->input->post('kode_pos'),
+				'kota' => $this->input->post('kota'),
+				'no_tlpn' => $this->input->post('no_tlpn'),
+				'no_hp' => $this->input->post('no_hp'),
+				'email' => $this->input->post('email'),
+			);
+			$this->m_sales->add_jual($data);
+
+			$biaya = array(
+				'no_permintaan' => $this->input->post('no_permintaan'),
+				'biaya_paket' => $this->input->post('biaya_paket'),
+				'biaya_paket_tambahan' => $this->input->post('biaya_paket_tambahan'),
+				'biaya_sewa_perangkat' => $this->input->post('biaya_sewa_perangkat'),
+				'biaya_pembelian_cpe' => $this->input->post('biaya_pembelian_cpe'),
+				'biaya_instalasi' => $this->input->post('biaya_instalasi'),
+				'uang_jaminan' => $this->input->post('uang_jaminan'),
+				'biaya_pasang_baru' => $this->input->post('biaya_pasang_baru'),
+				'catatan' => $this->input->post('catatan'),
+
+			);
+			$this->m_sales->add_bayar($biaya);
+			$this->session->set_flashdata('pesan', 'Penjualan Berhasil Ditambahkan');
+			redirect('penjualan');
+		}
 		$data = array(
-			'id_user' => $this->session->userdata('id_user'),
-			'tgl_penjualan' => date('Y-m-d H:i:s'),
-			'nama_pelanggan' => $this->input->post('nama_pelanggan'),
-			'no_hp' => $this->input->post('no_hp'),
-			'alamat' => $this->input->post('alamat'),
+			'title' => 'Input Penjualan Baru',
+			'isi' => 'frontend/penjualan/v_add'
 		);
-		$this->m_sales->add_jual($data);
-		$this->session->set_flashdata('pesan', 'Penjualan Berhasil Ditambahkan');
-		redirect('penjualan');
+		$this->load->view('frontend/v_wrapper', $data, FALSE);
 	}
 
-	//Update one item
-	public function update($id_penjualan)
+	public function detail($id_penjualan)
 	{
 		$data = array(
-			'id_penjualan' => $id_penjualan,
-			'tgl_penjualan' => date('Y-m-d H:i:s'),
-			'nama_pelanggan' => $this->input->post('nama_pelanggan'),
-			'no_hp' => $this->input->post('no_hp'),
-			'alamat' => $this->input->post('alamat'),
+			'title' => 'Detail Pelanggan',
+			'detail' => $this->m_sales->detail_penjualan($id_penjualan),
+			'isi' => 'frontend/penjualan/v_detail'
 		);
-		$this->m_sales->update_jual($data);
-		$this->session->set_flashdata('pesan', 'Penjualan Berhasil Diupdate');
-		redirect('penjualan');
-	}
-
-	//Delete one item
-	public function delete($id_penjualan)
-	{
-		$data = array(
-			'id_penjualan' => $id_penjualan
-		);
-		$this->m_sales->delete_jual($data);
-		$this->session->set_flashdata('pesan', 'Penjualan Berhasil Dihapus');
-		redirect('penjualan');
+		$this->load->view('frontend/v_wrapper', $data, FALSE);
 	}
 }
 

@@ -59,10 +59,10 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white <?php if (
-															$this->uri->segment(1) == 'analisis'
+															$this->uri->segment(1) == 'analisisdummy'
 														) {
 															echo "active bg-gradient-primary";
-														} ?> " href="<?= base_url('analisis') ?>">
+														} ?> " href="<?= base_url('analisisdummy') ?>">
 							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 								<i class="material-icons opacity-10">receipt_long</i>
 							</div>

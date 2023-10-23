@@ -45,7 +45,7 @@
 					</li>
 				<?php } ?>
 				<?php if ($this->session->userdata('level_user') == 'pimpinan') { ?>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link text-white <?php if (
 															$this->uri->segment(1) == 'laporan'
 														) {
@@ -56,7 +56,7 @@
 							</div>
 							<span class="nav-link-text ms-1">Master Laporan</span>
 						</a>
-					</li>
+					</li> -->
 					<li class="nav-item">
 						<a class="nav-link text-white <?php if (
 															$this->uri->segment(1) == 'analisisdummy'

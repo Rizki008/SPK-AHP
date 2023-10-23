@@ -337,6 +337,22 @@
 		document.querySelector('#searchDateTosakit').setAttribute('max', dtTo.getFullYear() + '-' + sMonthTo + '-' + sDayTo);
 	};
 </script>
+
+<!-- ANALISI  -->
+<script src="<?= base_url() ?>assets/jquery-3.7.1.min.js"></script>
+<script>
+	console.log = function() {}
+	$("#analisis").on('change', function() {
+
+		$(".tahun").html($(this).find(':selected').attr('data-tahun'));
+		$(".tahun").val($(this).find(':selected').attr('data-tahun'));
+
+		$(".bulan").html($(this).find(':selected').attr('data-bulan'));
+		$(".bulan").val($(this).find(':selected').attr('data-bulan'));
+
+
+	});
+</script>
 </body>
 
 </html>

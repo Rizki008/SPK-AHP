@@ -12,16 +12,16 @@
 					<div class="table-responsive p-0">
 						<table class="table align-items-center mb-0">
 							<tbody>
-								<?php $data = $this->db->query("SELECT MAX(no_permintaan) AS otomatis FROM penjualan ");
+
+								<?php
+								echo form_open('penjualan/add');
+								$data = $this->db->query("SELECT MAX(no_permintaan) AS otomatis FROM penjualan");
 								foreach ($data->result_array() as $row) {
 									$otomatis = $row['otomatis'];
 									$urutan =  substr($otomatis, 3, 3);
 									$urutan++;
 								}
-								?>
-								<?php
-								echo form_open('penjualan/add');
-								$kode = '00';
+								$kode = 'KDN';
 								$permintaan = $kode . sprintf("%03s", $urutan);
 								$no_tlpn = 1312 . strtoupper(random_string('nozero', 7));
 								?>

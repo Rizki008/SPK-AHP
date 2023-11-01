@@ -12,8 +12,18 @@
 					<div class="table-responsive p-0">
 						<table class="table align-items-center mb-0">
 							<tbody>
+								<?php $data = $this->db->query("SELECT MAX(no_permintaan) AS otomatis FROM penjualan ");
+								foreach ($data->result_array() as $row) {
+									$otomatis = $row['otomatis'];
+									$urutan =  substr($otomatis, 3, 3);
+									$urutan++;
+								}
+								?>
 								<?php
-								echo form_open('penjualan/add')
+								echo form_open('penjualan/add');
+								$kode = '00';
+								$permintaan = $kode . sprintf("%03s", $urutan);
+								$no_tlpn = 1312 . strtoupper(random_string('nozero', 7));
 								?>
 								<input type="hidden" name="id_user" value="<?= $this->session->userdata('id_user') ?>" class="form-control">
 								<div class="modal-body">
@@ -23,7 +33,7 @@
 										<div class="col">
 											<label class="form-label">No Permintaan</label>
 											<div class="input-group input-group-outline mb-3">
-												<input type="number" name="no_permintaan" class="form-control" placeholder="No permintaan" aria-label="No permintaan">
+												<input type="text" name="no_permintaan" value="<?= $permintaan ?>" class="form-control" placeholder="No permintaan" readonly aria-label="No permintaan">
 											</div>
 										</div>
 										<div class="col">
@@ -39,7 +49,7 @@
 										<div class="col">
 											<label class="form-label">No Telepon / Internet</label>
 											<div class="input-group input-group-outline mb-3">
-												<input type="text" name="no_tlp_internet" class="form-control" placeholder="Nomor Telepon / Internet" aria-label="Nomor Telepon / Internet">
+												<input type="text" name="no_tlp_internet" value="<?= $no_tlpn ?>" class="form-control" placeholder="Nomor Telepon / Internet" aria-label="Nomor Telepon / Internet" readonly>
 											</div>
 										</div>
 										<div class="col">
@@ -206,6 +216,20 @@
 											<label class="form-label">Catatan</label>
 											<div class="input-group input-group-outline mb-3">
 												<input type="text" name="catatan" class="form-control" placeholder="Catatan" aria-label="Catatan">
+											</div>
+										</div>
+									</div>
+									<h5>DURASI LANGGANAN</h5>
+									<hr>
+									<div class="row">
+										<div class="col-lg-12">
+											<label class="form-label">Durasi Langganan</label>
+											<div class="input-group input-group-outline mb-3">
+												<select name="durasi_langganan" class="form-control" id="">
+													<option value="3">3 Bulan</option>
+													<option value="6">6 Bulan</option>
+													<option value="12">1 Tahun</option>
+												</select>
 											</div>
 										</div>
 									</div>

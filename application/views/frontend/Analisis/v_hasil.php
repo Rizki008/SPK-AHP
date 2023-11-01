@@ -17,6 +17,7 @@
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Lengkap</th>
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Priode Analisis</th>
 									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hasil Analisis</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
 									<th class="text-secondary opacity-7"></th>
 								</tr>
 							</thead>
@@ -37,9 +38,20 @@
 											<p class="text-xs font-weight-bold mb-0">Bulan <?= $value->bulan ?> &nbsp; Tahun <?= $value->tahun ?></p>
 										</td>
 										<td class="align-middle text-center text-sm">
-											<span class="badge badge-sm bg-gradient-danger">
-												<?= $value->hasil_analisis ?>
+											<span class="badge badge-sm bg-gradient-info">
+												<?= round($value->hasil_analisis)  ?>
 											</span>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<?php if (round($value->hasil_analisis) >= 1) { ?>
+												<span class="badge badge-sm bg-gradient-success">
+													Terbaik
+												</span>
+											<?php } else { ?>
+												<span class="badge badge-sm bg-gradient-danger">
+													Terburuk
+												</span>
+											<?php } ?>
 										</td>
 									</tr>
 								<?php } ?>

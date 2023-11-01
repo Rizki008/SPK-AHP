@@ -28,8 +28,10 @@ class Pelanggan extends CI_Controller
 	{
 		$data = array(
 			'id_user' => $this->session->userdata('id_user'),
-			'id_penjualan' => $this->input->post('id_penjualan'),
-			// 'nama_paket' => $this->input->post('nama_paket'),
+			// 'id_penjualan' => $this->input->post('id_penjualan'),
+			// // 'nama_paket' => $this->input->post('nama_paket'),
+			'no_permintaan' => $this->input->post('no_permintaan'),
+			'tgl_berlangganan' => date('Y-m-d H:i:s'),
 			'durasi_langganan' => $this->input->post('durasi_langganan'),
 		);
 		$this->m_sales->add_pel($data);
@@ -43,8 +45,10 @@ class Pelanggan extends CI_Controller
 		$data = array(
 			'id_pelanggan' => $id_pelanggan,
 			'id_user' => $this->session->userdata('id_user'),
-			'id_penjualan' => $this->input->post('id_penjualan'),
-			// 'nama_paket' => $this->input->post('nama_paket'),
+			// 'id_penjualan' => $this->input->post('id_penjualan'),
+			// // 'nama_paket' => $this->input->post('nama_paket'),
+			'no_permintaan' => $this->input->post('no_permintaan'),
+			'tgl_berlangganan' => date('Y-m-d H:i:s'),
 			'durasi_langganan' => $this->input->post('durasi_langganan'),
 		);
 		$this->m_sales->update_pel($data);

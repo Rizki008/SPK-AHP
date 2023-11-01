@@ -93,14 +93,14 @@
 							<?php } ?>
 						</select>
 					</div>
-					<label class="form-label">Durasi Langganan</label>
+					<!-- <label class="form-label">Durasi Langganan</label>
 					<div class="input-group input-group-outline mb-3">
 						<select name="durasi_langganan" class="form-control" id="">
 							<option value="3">3 Bulan</option>
 							<option value="6">6 Bulan</option>
 							<option value="12">1 Tahun</option>
 						</select>
-					</div>
+					</div> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -134,7 +134,7 @@
 								<?php } ?>
 							</select>
 						</div>
-						<label class="form-label">Durasi Langganan</label>
+						<!-- <label class="form-label">Durasi Langganan</label>
 						<div class="input-group input-group-outline mb-3">
 							<select name="durasi_langganan" class="form-control" id="">
 								<option value="<?= $rows->durasi_langganan ?>"><?= $rows->durasi_langganan ?></option>
@@ -142,7 +142,7 @@
 								<option value="6">6 Bulan</option>
 								<option value="12">1 Tahun</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

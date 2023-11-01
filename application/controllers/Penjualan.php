@@ -41,6 +41,7 @@ class Penjualan extends CI_Controller
 		} else {
 			$data = array(
 				'id_user' => $this->session->userdata('id_user'),
+				'id_penjualan' => $this->input->post('id_penjualan'),
 				'tgl_kontrak_langganan' => date('Y-m-d H:i:s'),
 				'no_permintaan' => $this->input->post('no_permintaan'),
 				'jenis_permohonan' => $this->input->post('jenis_permohonan'),
@@ -76,6 +77,14 @@ class Penjualan extends CI_Controller
 
 			);
 			$this->m_sales->add_bayar($biaya);
+
+			$langganan = array(
+				'id_user' => $this->session->userdata('id_user'),
+				'no_permintaan' => $this->input->post('no_permintaan'),
+				'tgl_berlangganan' => date('Y-m-d H:i:s'),
+				'durasi_langganan' => $this->input->post('durasi_langganan'),
+			);
+			$this->m_sales->add_pel($langganan);
 			$this->session->set_flashdata('pesan', 'Penjualan Berhasil Ditambahkan');
 			redirect('penjualan');
 		}

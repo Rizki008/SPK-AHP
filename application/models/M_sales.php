@@ -79,7 +79,10 @@ class M_sales extends CI_Model
 		$this->db->where('id_penjualan', $id_penjualan);
 		return $this->db->get()->result();
 	}
-
+	public function urutan()
+	{
+		return $this->db->query("SELECT MAX(no_permintaan) AS otomatis FROM penjualan ")->result();
+	}
 	public function add_jual($data)
 	{
 		$this->db->insert('penjualan', $data);
@@ -104,7 +107,7 @@ class M_sales extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('pelanggan');
-		$this->db->join('penjualan', 'penjualan.id_penjualan = pelanggan.id_penjualan', 'left');
+		$this->db->join('penjualan', 'penjualan.no_permintaan = pelanggan.no_permintaan', 'left');
 		$this->db->order_by('id_pelanggan', 'desc');
 		return $this->db->get()->result();
 	}

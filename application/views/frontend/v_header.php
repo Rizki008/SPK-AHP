@@ -71,6 +71,42 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white <?php if (
+															$this->uri->segment(1) == 'analisisdummy' and $this->uri->segment(2) == 'langganan'
+														) {
+															echo "active bg-gradient-primary";
+														} ?> " href="<?= base_url('analisisdummy/langganan') ?>">
+							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="material-icons opacity-10">receipt_long</i>
+							</div>
+							<span class="nav-link-text ms-1">Analisis Langganan</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white <?php if (
+															$this->uri->segment(1) == 'analisisdummy' and $this->uri->segment(2) == 'penjualan'
+														) {
+															echo "active bg-gradient-primary";
+														} ?> " href="<?= base_url('analisisdummy/penjualan') ?>">
+							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="material-icons opacity-10">receipt_long</i>
+							</div>
+							<span class="nav-link-text ms-1">Analisis Penjualan</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white <?php if (
+															$this->uri->segment(1) == 'analisisdummy' && $this->uri->segment(2) == 'absen'
+														) {
+															echo "active bg-gradient-primary";
+														} ?> " href="<?= base_url('analisisdummy/absen') ?>">
+							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="material-icons opacity-10">receipt_long</i>
+							</div>
+							<span class="nav-link-text ms-1">Analisis Absensi</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white <?php if (
 															$this->uri->segment(1) == 'pimpinan' && $this->uri->segment(2) == 'akun'
 														) {
 															echo "active bg-gradient-primary";

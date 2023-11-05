@@ -68,6 +68,9 @@
 									<a href="<?= base_url('AnalisisDummy/hasil/' . $value->bulan . '/' . $value->tahun) ?>" class="btn bg-gradient-info btn-sm">
 										Lihat Hasil
 									</a>
+									<a href="<?= base_url('AnalisisDummy/hasil_bobot/' . $value->bulan . '/' . $value->tahun) ?>" class="btn bg-gradient-warning btn-sm">
+										Lihat Hasil BOBOT
+									</a>
 								</td>
 							</tr>
 						<?php } ?>

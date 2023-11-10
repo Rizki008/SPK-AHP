@@ -2,7 +2,17 @@
 	<div class="card mt-4">
 		<div class="card-header p-3">
 			<h5 class="mb-0"><?= $title ?></h5>
+			<br>
+			<h6>Informasi Alur Perhitungan : </h6>
+			<p>Hasil Dari Perhitungan Analisis diambil dari data <br>
+				1. Absensi Selama satu bulan Dengan nilai bobot 25%<br>
+				2. Data Pejualana selama satu bulan Dengan nilai bobot 50%<br>
+				3. Dan Data Pelanggan baru dengan nilai bobo 25%</p>
+			------------------------------------------------------------------------------
+			<br>
+			Data Akan Dihitung secara otomatis oleh sistem selama 1 bulan sesuai dengan nilai bobot yang di cantumkan.
 		</div>
+
 		<div class="col-md-12 mb-lg-0 mb-4">
 			<div class="card-body p-3">
 				<div class="row">

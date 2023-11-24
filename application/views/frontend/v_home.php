@@ -66,10 +66,10 @@
 									<div class="text-center">
 										<button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Masuk</button>
 									</div>
-									<p class="mt-4 text-sm text-center">
+									<!-- <p class="mt-4 text-sm text-center">
 										Lupa Password Account?
 										<a href="<?= base_url() ?>template/pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Ubah Password</a>
-									</p>
+									</p> -->
 								</form>
 							</div>
 						</div>

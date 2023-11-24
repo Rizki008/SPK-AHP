@@ -7,9 +7,9 @@
 					<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
 						<h6 class="text-white text-capitalize ps-3"><?= $title ?></h6>
 						<div class="col-lg-3 col-sm-6 col-12">
-							<button type="button" class="btn bg-gradient-success w-100 mb-0 toast-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<!-- <button type="button" class="btn bg-gradient-success w-100 mb-0 toast-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								Tambah Pelanggan
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
@@ -57,9 +57,9 @@
 											<?php } ?>
 										</td>
 										<td class="align-middle">
-											<button type="button" class="btn bg-gradient-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edit<?= $value->id_pelanggan ?>">
+											<!-- <button type="button" class="btn bg-gradient-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edit<?= $value->id_pelanggan ?>">
 												Edit
-											</button>
+											</button> -->
 										</td>
 									</tr>
 								<?php } ?>

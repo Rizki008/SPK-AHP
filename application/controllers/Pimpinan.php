@@ -49,6 +49,7 @@ class Pimpinan extends CI_Controller
 			'password' => $this->input->post('password'),
 			'no_hp' => $this->input->post('no_hp'),
 			'alamat' => $this->input->post('alamat'),
+			'status' => $this->input->post('status'),
 			'level_user' => 'sales',
 		);
 		$this->m_auth->add($data);
@@ -64,7 +65,18 @@ class Pimpinan extends CI_Controller
 			'password' => $this->input->post('password'),
 			'no_hp' => $this->input->post('no_hp'),
 			'alamat' => $this->input->post('alamat'),
+			'status' => $this->input->post('status'),
 			'level_user' => 'sales',
+		);
+		$this->m_auth->update($data);
+		$this->session->set_flashdata('pesan', 'Akun Sales Berhasil Diupdate');
+		redirect('pimpinan/akun');
+	}
+	public function status($id_user)
+	{
+		$data = array(
+			'id_user' => $id_user,
+			'status' => $this->input->post('status'),
 		);
 		$this->m_auth->update($data);
 		$this->session->set_flashdata('pesan', 'Akun Sales Berhasil Diupdate');

@@ -50,6 +50,7 @@
 										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
 										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
 										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Password</th>
+										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
 										<th class="text-secondary opacity-7"></th>
 									</tr>
 								</thead>
@@ -84,7 +85,13 @@
 													******
 												</span>
 											</td>
+											<td class="align-middle text-center text-sm">
+												<span class="badge badge-sm bg-gradient-warning">
+													<?= $value->status ?>
+												</span>
+											</td>
 											<td class="align-middle text-center">
+												<button class="btn bg-gradient-info w-30 mb-0 toast-btn" type="button" data-bs-toggle="modal" data-bs-target="#infoToast<?= $value->id_user ?>">Update status</button>
 												<button class="btn bg-gradient-warning w-30 mb-0 toast-btn" type="button" data-bs-toggle="modal" data-bs-target="#warningToast<?= $value->id_user ?>">Edit</button>
 												<button class="btn bg-gradient-danger w-30 mb-0 toast-btn" type="button" data-bs-toggle="modal" data-bs-target="#dangerToast<?= $value->id_user ?>">Hapus</button>
 											</td>
@@ -126,6 +133,14 @@
 				<label class="form-label">Password</label>
 				<div class="input-group input-group-outline mb-3">
 					<input type="password" name="password" class="form-control">
+				</div>
+				<label class="form-label">Status</label>
+				<div class="input-group input-group-outline mb-3">
+					<select name="status" class="form-control">
+						<option>---Pilih status---</option>
+						<option value="aktif">Aktif</option>
+						<option value="resign">Resign</option>
+					</select>
 				</div>
 				<label class="form-label">Alamat</label>
 				<div class="input-group input-group-outline mb-3">
@@ -171,9 +186,50 @@
 					<div class="input-group input-group-outline mb-3">
 						<input type="password" name="password" value="<?= $update->password ?>" class="form-control">
 					</div>
+					<label class="form-label">Status</label>
+					<div class="input-group input-group-outline mb-3">
+						<select name="status" class="form-control">
+							<option value="<?= $update->status ?>"><?= $update->status ?></option>
+							<option>---Pilih status---</option>
+							<option value="aktif">Aktif</option>
+							<option value="resign">Resign</option>
+						</select>
+					</div>
 					<label class="form-label">Alamat</label>
 					<div class="input-group input-group-outline mb-3">
 						<input type="text" name="alamat" value="<?= $update->alamat ?>" class="form-control">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				<?php echo form_close() ?>
+			</div>
+		</div>
+	</div>
+<?php } ?>
+<?php foreach ($akun as $key => $status) { ?>
+	<!-- Modal status -->
+	<div class="modal fade" id="infoToast<?= $status->id_user ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><?= $title ?></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<?php
+				echo form_open('pimpinan/status/' . $status->id_user)
+				?>
+				<div class="modal-body">
+					<label class="form-label">Status</label>
+					<div class="input-group input-group-outline mb-3">
+						<select name="status" class="form-control">
+							<option value="<?= $status->status ?>"><?= $status->status ?></option>
+							<option>---Pilih status---</option>
+							<option value="aktif">Aktif</option>
+							<option value="resign">Resign</option>
+						</select>
 					</div>
 				</div>
 				<div class="modal-footer">

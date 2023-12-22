@@ -60,6 +60,41 @@ class M_analisis extends CI_Model
 		return $this->db->query("SELECT *,bulan, tahun FROM `analisis_bulan` LEFT JOIN user ON analisis_bulan.id_user=user.id_user WHERE bulan='" . $bulan . "' AND tahun='" . $tahun . "' ORDER BY hasil_analisis DESC")->result();
 	}
 
+
+	// RANGE PERTAHUN
+	public function cek_analisis_tahun($tahun)
+	{
+		return $this->db->query("SELECT tahun FROM `analisis_tahun` WHERE tahun='" . $tahun . "' GROUP BY  tahun")->row();
+	}
+
+	public function periode_analisis_tahun()
+	{
+		return $this->db->query("SELECT YEAR(tanggal_absen) as tahun, id_user FROM `absen` GROUP BY YEAR(tanggal_absen)")->result();
+	}
+
+	public function tahun()
+	{
+		return $this->db->query("SELECT * from analisis_tahun GROUP BY tahun")->result();
+	}
+	public function kehadiran_tahun($tahun)
+	{
+		return $this->db->query("SELECT COUNT(id_absen) as jml, id_user FROM `absen` WHERE status= '1' AND YEAR(tanggal_absen)='" . $tahun . "' GROUP BY id_user")->result();
+	}
+	public function durasi_langgaran_tahun($tahun)
+	{
+		return $this->db->query("SELECT SUM(durasi_langganan) as durasi, id_user FROM `pelanggan`  WHERE YEAR(tgl_berlangganan)='" . $tahun . "' GROUP BY id_user")->result();
+	}
+	public function penjualan_tahun($tahun)
+	{
+		return $this->db->query("SELECT COUNT(id_penjualan) as penjualan,id_user FROM `penjualan` WHERE YEAR(tgl_kontrak_langganan)='" . $tahun . "' GROUP BY id_user")->result();
+	}
+	public function hasil_tahun($tahun)
+	{
+		return $this->db->query("SELECT *, tahun FROM `analisis_tahun` LEFT JOIN user ON analisis_tahun.id_user=user.id_user WHERE tahun='" . $tahun . "' ORDER BY hasil_analisis DESC")->result();
+	}
+
+
+
 	// // LANGGANAN
 	// public function periode_analisis_langganan()
 	// {

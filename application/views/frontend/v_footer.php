@@ -353,6 +353,15 @@
 
 	});
 </script>
+<script>
+	console.log = function() {}
+	$("#analisistahun").on('change', function() {
+
+		$(".tahun").html($(this).find(':selected').attr('data-tahun'));
+		$(".tahun").val($(this).find(':selected').attr('data-tahun'));
+
+	});
+</script>
 </body>
 
 </html>

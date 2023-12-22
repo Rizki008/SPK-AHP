@@ -83,6 +83,18 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-white <?php if (
+															$this->uri->segment(2) == 'tahun' and $this->uri->segment(1) == 'analisisdummy'
+														) {
+															echo "active bg-gradient-primary";
+														} ?> " href="<?= base_url('analisisdummy/tahun') ?>">
+							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="material-icons opacity-10">receipt_long</i>
+							</div>
+							<span class="nav-link-text ms-1">Analisis AHP Pertahun</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-white <?php if (
 															$this->uri->segment(1) == 'pimpinan' && $this->uri->segment(2) == 'akun'
 														) {
 															echo "active bg-gradient-primary";

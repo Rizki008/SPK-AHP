@@ -100,6 +100,8 @@ class AnalisisDummy extends CI_Controller
 			);
 			$this->db->insert('analisis', $data);
 		}
+		// var_dump($data);
+		// die();
 		redirect('AnalisisDummy');
 	}
 
@@ -217,6 +219,137 @@ class AnalisisDummy extends CI_Controller
 		);
 		$this->load->view('frontend/v_wrapper', $data, FALSE);
 	}
+
+
+	// RANGE PERBULAN
+	public function tahun()
+	{
+		$data = array(
+			'title' => 'Analisis AHP sales',
+			'tahun' => $this->M_analisis->tahun(),
+			'periode' => $this->M_analisis->periode_analisis_tahun(),
+			'isi' => 'frontend/analisis/tahun/v_analisis'
+		);
+		$this->load->view('frontend/v_wrapper', $data, FALSE);
+
+		// $this->load->view('vAnalisis', $data);
+	}
+
+	public function hitung_tahun()
+	{
+		//periode
+		// $bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+
+
+		//variabel
+		$absensi = $this->M_analisis->kehadiran_tahun($tahun);
+		$kualitas = $this->M_analisis->durasi_langgaran_tahun($tahun);
+		$penjualan = $this->M_analisis->penjualan_tahun($tahun);
+
+		foreach ($absensi as $absen) {
+			$id_user[] = $absen->id_user;
+			$absensi_persen = round(($absen->jml / 365) * 100, 0);
+			// echo $absensi_persen;
+			// echo '<br>';
+			if ($absensi_persen > 90 && $absensi_persen <= 100) {
+				$ev_kehadiran[] = 0.68148;
+			} else if ($absensi_persen > 70 && $absensi_persen <= 90) {
+				$ev_kehadiran[] = 0.23566;
+			} else if ($absensi_persen <= 70) {
+				$ev_kehadiran[] = 0.08286;
+			}
+		}
+		foreach ($kualitas as $kuali) {
+			// echo $kuali->durasi;
+			// echo '<br>';
+			if ($kuali->durasi > '100' && $kuali->durasi <= '150') {
+				$ev_kualitas[] = 0.68148;
+			} else if ($kuali->durasi > '50' && $kuali->durasi <= '100') {
+				$ev_kualitas[] = 0.23566;
+			} else if ($kuali->durasi <= '50') {
+				$ev_kualitas[] = 0.08286;
+			} else if ($kuali->durasi > 150) {
+				$ev_kualitas[] = 0.68148;
+			}
+		}
+		foreach ($penjualan as $jual) {
+			// echo $jual->penjualan;
+			// echo '<br>';
+			if ($jual->penjualan > 50 && $jual->penjualan <= 80) {
+				$ev_penjualan[] = 0.68148;
+			} else if ($jual->penjualan > 20 && $jual->penjualan <= 50) {
+				$ev_penjualan[] = 0.23566;
+			} else if ($jual->penjualan <= 20) {
+				$ev_penjualan[] = 0.08286;
+			} else if ($jual->penjualan > 80) {
+				$ev_penjualan[] = 0.68148;
+			}
+		}
+
+		$kehadiran = 0.681466667;
+		$kualitas = 0.235633333;
+		$penjualan = 0.082833333;
+
+		$t_kehadiran = 0;
+		$t_kualitas = 0;
+		$t_penjualan = 0;
+
+
+		for ($i = 0; $i < sizeof($ev_kehadiran); $i++) {
+
+			// echo $i . '|' . $ev_kehadiran[$i] . $ev_kualitas[$i] . $ev_penjualan[$i];
+			// echo '<br>';
+			// $t_kehadiran = $ev_kehadiran[$i] * $kehadiran;
+			// $t_kualitas = $ev_kualitas[$i] * $kualitas;
+			// $t_penjualan = $ev_penjualan[$i] * $penjualan;
+
+			$t_kehadiran = round($ev_kehadiran[$i] * $kehadiran, 4);
+			$t_kualitas = round($ev_kualitas[$i] * $kualitas, 4);
+			$t_penjualan = round($ev_penjualan[$i] * $penjualan, 4);
+
+
+			$hasil = round($t_kehadiran + $t_kualitas + $t_penjualan, 4);
+
+			echo $hasil;
+			echo '<br>';
+			$data = array(
+				'id_user' => $id_user[$i],
+				// 'bulan' => $bulan,
+				'tahun' => $tahun,
+				'kehadiran' => $t_kehadiran,
+				'kualitas' => $t_kualitas,
+				'penjualan' => $t_penjualan,
+				'hasil_analisis' => $hasil
+			);
+			$this->db->insert('analisis_tahun', $data);
+			// echo var_dump($data);
+			// die();
+		}
+		// die();
+		redirect('AnalisisDummy/tahun');
+	}
+
+	public function hasil_tahun($tahun)
+	{
+		$data = array(
+			'title' => 'Hasil Perhitungan AHP',
+			'hasil' => $this->M_analisis->hasil_tahun($tahun),
+			'isi' => 'frontend/analisis/tahun/v_hasil'
+		);
+		$this->load->view('frontend/v_wrapper', $data, FALSE);
+	}
+	public function hasil_bobot_tahun($tahun)
+	{
+		$data = array(
+			'title' => 'Hasil Perhitungan AHP',
+			'hasil' => $this->M_analisis->hasil_tahun($tahun),
+			'isi' => 'frontend/analisis/tahun/v_hasil_bobot'
+		);
+		$this->load->view('frontend/v_wrapper', $data, FALSE);
+	}
+
+
 
 
 	// // ABSEN 
